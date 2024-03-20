@@ -1,3 +1,5 @@
+// Grid.cpp
+
 #include "Grid.h"
 
 Grid::Grid( int width, int height ) {
@@ -12,11 +14,11 @@ Grid::Grid( int width, int height ) {
 	this->Back.resize( this->Front.size( ) );
 }
 
-int Grid::GetWidth( ) {
+inline int Grid::GetWidth( ) {
 	return this->Width;
 }
 
-int Grid::GetHeight( ) {
+inline int Grid::GetHeight( ) {
 	return this->Height;
 }
 
