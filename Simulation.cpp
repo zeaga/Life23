@@ -1,9 +1,7 @@
 // Simulation.cpp
 
-// Computes the modulus operation with a positive result even for negative numbers.
-#define MOD_POSITIVE(a,b) (((a)%(b))+(b))%(b)
-
 #include "Simulation.h"
+#include <iostream>
 
 Simulation::Simulation( int width, int height ) : grid( width, height ) {
 	ResetToDefaults( );
@@ -37,10 +35,14 @@ void Simulation::ResetToDefaults( ) {
 	PercentFilled = 0.5f;
 	DisableStrobing = false;
 	PreemptiveIterations = 0;
+	UseMultithreading = true;
 }
 
 void Simulation::Tick( ) {
-	grid.Tick( );
+	if ( UseMultithreading )
+		grid.TickWithMultithreading( );
+	else
+		grid.Tick( );
 }
 
 void Simulation::UpdateKeyboard( ) {
@@ -188,6 +190,7 @@ void Simulation::DrawBrush( int x, int y, int size ) {
 }
 
 void Simulation::Draw( bool showCursor = false ) {
+	ClearBackground( DeadColor );
 	for ( int y = 0; y < grid.GetHeight( ); y++ ) {
 		for ( int x = 0; x < grid.GetWidth( ); x++ ) {
 			if ( grid.Get( MOD_POSITIVE( x + PanX, grid.GetWidth( ) ), MOD_POSITIVE( y + PanY, grid.GetHeight( ) ) ) ) {

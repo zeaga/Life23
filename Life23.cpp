@@ -20,12 +20,14 @@ int main( int argc, char* argv[] ) {
 	Simulation sim( 160, 90 );
 	GuiManager gui( sim );
 	rlImGuiSetup( true );
+	ImGui::GetIO( ).IniFilename = NULL;
+	ImGui::GetIO( ).LogFilename = NULL;
 	while ( !WindowShouldClose( ) ) {
-		sim.Update( ImGui::GetIO( ).WantCaptureKeyboard, ImGui::GetIO( ).WantCaptureMouse );
+		auto& io = ImGui::GetIO( );
+		sim.Update( io.WantCaptureKeyboard, io.WantCaptureMouse );
 		BeginDrawing( );
 		rlImGuiBegin( );
-		ClearBackground( BLACK );
-		sim.Draw( ImGui::GetIO( ).WantCaptureMouse );
+		sim.Draw( io.WantCaptureMouse );
 		gui.Draw( );
 		rlImGuiEnd( );
 		DrawCircle( GetMouseX( ), GetMouseY( ), 4, { 255, 255, 255, 255 } );

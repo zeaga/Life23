@@ -61,6 +61,8 @@ public:
 	bool RandomRules{};
 	bool DisableStrobing{};
 	int PreemptiveIterations{};
+
+	bool UseMultithreading{};
 #pragma endregion
 
 private:

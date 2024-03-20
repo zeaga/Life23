@@ -3,6 +3,9 @@
 #pragma once
 #include <vector>
 
+// Computes the modulus operation with a positive result even for negative numbers.
+#define MOD_POSITIVE(a,b) (((a)%(b))+(b))%(b)
+
 enum WrapSetting {
 	AlwaysOff,
 	AlwaysOn,
@@ -20,6 +23,7 @@ public:
 	char SurviveRule[9];
 	int GetWidth( );
 	int GetHeight( );
+	void TickWithMultithreading( );
 	void Tick( );
 	void Randomize( );
 	void Randomize( float percent );

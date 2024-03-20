@@ -38,7 +38,8 @@ void GuiManager::Draw( ) {
 	ImGui::Begin( "Life23", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoResize );
 
 	ImGui::LabelText( "FPS", std::to_string( GetFPS( ) ).c_str( ) );
-	ImGui::LabelText( "TPS", std::to_string( sim->ActualTickRate ).c_str( ) );
+	// TODO: Fix this
+//	ImGui::LabelText( "TPS", std::to_string( sim->ActualTickRate ).c_str( ) );
 	ImGui::InputInt( "Ticks per second", &sim->TicksPerSecond, 1, 10 );
 	int newScale = sim->Scale;
 	ImGui::InputInt( "Scale", &newScale, 1, 5 );
@@ -50,6 +51,7 @@ void GuiManager::Draw( ) {
 		sim->Scale = newScale;
 		grid->Resize( sim->Width / sim->Scale, sim->Height / sim->Scale );
 	}
+	ImGui::Checkbox( "Enable multithreading", &sim->UseMultithreading );
 	ImGui::Checkbox( "Enable grid", &sim->EnableGrid );
 	if ( ImGui::Button( "Reset all settings" ) )
 		sim->ResetToDefaults( );
